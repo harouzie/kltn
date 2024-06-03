@@ -12,7 +12,7 @@ from model.optim import ScheduledOptim, Adam
 import os
 from eval import evaluate
 from model.contrast import ContrastModel, StructureContrast, GraphContrast
-
+from tqdm import tqdm
 import utils
 import arg_parser
 
@@ -102,7 +102,7 @@ def params_and_time(config, train_set, test_set, num_epochs=20):
     optimizer = Adam(model.parameters(), lr=config.train.bert_lr)
 
     begin_time = time.time()
-    for epoch in range(num_epochs):
+    for epoch in tqdm(range(num_epochs)):
         model.train()
         for data, label, idx in train_set:
             padding_mask = data != tokenizer.pad_token_id
@@ -137,7 +137,7 @@ def run_test(config, test_set, extra):
 
     model.eval()
     with torch.no_grad():
-        for data, label, idx in test_set:
+        for data, label, idx in tqdm(test_set, desc="Running evaluation testset"):
             padding_mask = data != tokenizer.pad_token_id
             output = model(data, padding_mask, return_dict=True, )
             for l in label:
@@ -184,14 +184,14 @@ def run_train(config, train_set, dev_set):
     best_score_micro = 0.0
     early_stop_count = 0
 
-    for epoch in range(config.train.epoch):
+    for epoch in tqdm(range(config.train.epoch), leave=False, unit="Epoch", desc="Training model..."):
         if early_stop_count >= config.train.early_stop:
             print("Early stop!")
             break
         model.train()
         loss = 0.0
         # -------------Train-----------------------------
-        for data, label, idx in train_set:
+        for data, label, idx in tqdm(train_set, unit="batch", desc="Epoch in progress..."):
             padding_mask = data != tokenizer.pad_token_id
             output = model(data, padding_mask, labels=label, return_dict=True, )
             loss += output['loss'].item()
@@ -213,7 +213,7 @@ def run_train(config, train_set, dev_set):
         with torch.no_grad():
             truth = []
             pred = []
-            for data, label, idx in dev_set:
+            for data, label, idx in tqdm(dev_set, unit="batch", desc="Evaluation"):
                 padding_mask = data != tokenizer.pad_token_id
                 output = model(data, padding_mask, labels=label, return_dict=True, )
                 for l in label:
@@ -228,7 +228,7 @@ def run_train(config, train_set, dev_set):
         scores = evaluate(pred, truth, label_dict)
         macro_f1 = scores['macro_f1']
         micro_f1 = scores['micro_f1']
-        print("epoch: %d\t loss: %.6f\t micro_f1: %.4f\t macro_f1: %.4f" % (epoch, loss, micro_f1, macro_f1))
+        tqdm.write("epoch: %d\t loss: %.6f\t micro_f1: %.4f\t macro_f1: %.4f" % (epoch, loss, micro_f1, macro_f1))
         if config.wandb:
             wandb.log({'val_micro': micro_f1, 'val_macro': macro_f1, 'best_micro': best_score_micro,
                        'best_macro': best_score_macro})
@@ -280,7 +280,7 @@ if __name__ == '__main__':
     dev = Subset(dataset, split['val'])
     test = Subset(dataset, split['test'])
 
-    params_and_time(config, train, test)
+    # params_and_time(config, train, test)
 
     # ------------Run once----------------------
     utils.seed_torch(args.seed)
@@ -296,6 +296,6 @@ if __name__ == '__main__':
                                     args.tree_pooling_type,
                                     args.lamda)
 
-    # run_once(config, train, dev, test)
-    params_and_time(config, train, dev, test)
+    run_once(config, train, dev, test)
+    # params_and_time(config, train, dev, test)
 
