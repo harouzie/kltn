@@ -258,8 +258,8 @@ if __name__ == '__main__':
     args = arg_parser.get_args()
     print(args)
     config = utils.Configure(config_json_file=os.path.join(args.cfg_dir, args.model_name + '.json'))
-    bert_file = "/YOUR_BERT_DIR/bert-base-uncased"  # For offline.
-    # bert_file = 'bert-base-uncased'  # For online.
+    # bert_file = "/YOUR_BERT_DIR/bert-base-uncased"  # For offline.
+    bert_file = 'bert-base-uncased'  # For online.
     tokenizer = AutoTokenizer.from_pretrained(bert_file)
     data_path = os.path.join(args.data_dir, args.dataset)
     label_dict = torch.load(os.path.join(data_path, 'bert_value_dict.pt'))

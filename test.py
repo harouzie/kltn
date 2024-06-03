@@ -32,7 +32,7 @@ if __name__ == '__main__':
 
     config = utils.Configure(config_json_file=os.path.join(args.cfg_dir, args.model_name + '.json'))
     config.update(vars(args))
-    bert_file = "/YOUR_BERT_DIR/bert-base-uncased"
+    bert_file = "bert-base-uncased"
 
     tokenizer = AutoTokenizer.from_pretrained(bert_file)
 

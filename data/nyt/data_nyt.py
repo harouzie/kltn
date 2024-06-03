@@ -17,7 +17,7 @@ sample_ratio = 0.02
 train_ratio = 0.7
 min_per_node = 200
 
-tokenizer = AutoTokenizer.from_pretrained("/gs/home/royzh/transformers/bert-base-uncased")
+tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
 source = []
 labels = []
 label_ids = []

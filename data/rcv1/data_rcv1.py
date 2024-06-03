@@ -12,7 +12,7 @@ from collections import defaultdict
 np.random.seed(7)
 
 if __name__ == '__main__':
-    tokenizer = AutoTokenizer.from_pretrained("/gs/home/royzh/transformers/bert-base-uncased")
+    tokenizer = AutoTokenizer.from_pretrained("bert-base-uncased")
     source = []
     labels = []
     label_dict = {}
