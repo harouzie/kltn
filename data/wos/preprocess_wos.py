@@ -8,7 +8,7 @@ import re
 WoS Reference: https://github.com/kk7nc/HDLTex
 """
 
-FILE_DIR = './Data1k.txt'
+FILE_DIR = './Data.txt'
 total_len = []
 np.random.seed(7)
 

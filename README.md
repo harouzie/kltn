@@ -26,9 +26,9 @@ The project utilizes various technologies and libraries, including:
 
 The project utilizes several benchmark datasets for multi-label text classification, including:
 
-**WOS (Web of Science):** A dataset of scientific articles with multiple topic labels.
-**NYT (New York Times):** A dataset of news articles with multiple topic labels.
-**RCV1 (Reuters Corpus Volume 1):** A dataset of news articles with multiple topic labels.
+* **WOS (Web of Science):** A dataset of scientific articles with multiple topic labels.
+* **NYT (New York Times):** A dataset of news articles with multiple topic labels.
+* **RCV1 (Reuters Corpus Volume 1):** A dataset of news articles with multiple topic labels.
 
 ### Results and Discussion
 
