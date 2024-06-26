@@ -191,7 +191,7 @@ def run_train(config, train_set, dev_set):
         model.train()
         loss = 0.0
         # -------------Train-----------------------------
-        for data, label, idx in tqdm(train_set, unit="batch", desc="Epoch in progress..."):
+        for data, label, idx in tqdm(train_set, unit="batch", desc=f"Epoch {idx} in progress..."):
             padding_mask = data != tokenizer.pad_token_id
             output = model(data, padding_mask, labels=label, return_dict=True, )
             loss += output['loss'].item()
