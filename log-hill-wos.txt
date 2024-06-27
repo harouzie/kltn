@@ -1,0 +1,14 @@
+epoch: 1         loss: 0.401563  micro_f1: 0.8573        macro_f1: 0.7658
+epoch: 2         loss: 0.309663  micro_f1: 0.8660        macro_f1: 0.8040 
+epoch: 3         loss: 0.249586  micro_f1: 0.8721        macro_f1: 0.8044 
+epoch: 4         loss: 0.200600  micro_f1: 0.8726        macro_f1: 0.8139
+epoch: 5         loss: 0.161086  micro_f1: 0.8719        macro_f1: 0.8119 
+epoch: 6         loss: 0.139408  micro_f1: 0.8681        macro_f1: 0.8088 
+epoch: 7         loss: 0.119855  micro_f1: 0.8705        macro_f1: 0.8090  
+epoch: 8         loss: 0.114732  micro_f1: 0.8732        macro_f1: 0.8157
+epoch: 9         loss: 0.106428  micro_f1: 0.8691        macro_f1: 0.8087 
+epoch: 10        loss: 0.096915  micro_f1: 0.8681        macro_f1: 0.8076     
+epoch: 11        loss: 0.097944  micro_f1: 0.8735        macro_f1: 0.8147
+epoch: 12        loss: 0.093240  micro_f1: 0.8702        macro_f1: 0.8119
+epoch: 13        loss: 0.089004  micro_f1: 0.8707        macro_f1: 0.8120 
+epoch: 14        loss: 0.092699  micro_f1: 0.8619        macro_f1: 0.8012
