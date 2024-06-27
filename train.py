@@ -15,7 +15,7 @@ from model.contrast import ContrastModel, StructureContrast, GraphContrast
 from tqdm import tqdm
 import utils
 import arg_parser
-
+import logging
 import warnings
 warnings.filterwarnings('ignore')
 
@@ -191,7 +191,7 @@ def run_train(config, train_set, dev_set):
         model.train()
         loss = 0.0
         # -------------Train-----------------------------
-        for data, label, idx in tqdm(train_set, unit="batch", desc=f"Epoch {idx} in progress..."):
+        for data, label, idx in tqdm(train_set, unit="batch", desc=f"Epoch in progress..."):
             padding_mask = data != tokenizer.pad_token_id
             output = model(data, padding_mask, labels=label, return_dict=True, )
             loss += output['loss'].item()
@@ -208,6 +208,7 @@ def run_train(config, train_set, dev_set):
         if args.wandb:
             wandb.log({'train_loss': loss})
 
+        logging.info(f"[epoch {idx} | train_loss: {loss}]")
         # -------------Eval-------------------------------
         model.eval()
         with torch.no_grad():
@@ -229,6 +230,7 @@ def run_train(config, train_set, dev_set):
         macro_f1 = scores['macro_f1']
         micro_f1 = scores['micro_f1']
         tqdm.write("epoch: %d\t loss: %.6f\t micro_f1: %.4f\t macro_f1: %.4f" % (epoch, loss, micro_f1, macro_f1))
+        logging.info("[epoch: %d\t loss: %.6f\t micro_f1: %.4f\t macro_f1: %.4f]" % (epoch, loss, micro_f1, macro_f1))
         if config.wandb:
             wandb.log({'val_micro': micro_f1, 'val_macro': macro_f1, 'best_micro': best_score_micro,
                        'best_macro': best_score_macro})
@@ -265,6 +267,7 @@ if __name__ == '__main__':
     label_dict = torch.load(os.path.join(data_path, 'bert_value_dict.pt'))
     label_dict = {i: tokenizer.decode(v, skip_special_tokens=True) for i, v in label_dict.items()}
     num_class = len(label_dict)
+    logging.basicConfig(level=logging.INFO, filename=f"model-{args.model_name}.log",filemode="w")
 
     MODELS = {
         'hill': StructureContrast,  # HILL (ours)
