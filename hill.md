@@ -94,6 +94,7 @@ An example of training HILL on Web Of Science:
 
 ```
 python train.py -d wos -mn hill -s 0 -b 24 -lr 1e-3 -k 3 -l 1e-3 -hd 768 -tp sum
+python train.py -d wos -mn hill -s 0 -b 24 -lr 1e-3 -k 3 -l 1e-3 -hd 768 -tp sum --cfg_dir config
 ```
 
 ## Test
