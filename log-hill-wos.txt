@@ -12,3 +12,4 @@ epoch: 11        loss: 0.097944  micro_f1: 0.8735        macro_f1: 0.8147
 epoch: 12        loss: 0.093240  micro_f1: 0.8702        macro_f1: 0.8119
 epoch: 13        loss: 0.089004  micro_f1: 0.8707        macro_f1: 0.8120 
 epoch: 14        loss: 0.092699  micro_f1: 0.8619        macro_f1: 0.8012
+epoch: 15        loss: 0.091100 micro_f1: 0.8710         macro_f1: 0.8122
