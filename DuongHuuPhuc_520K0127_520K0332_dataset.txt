@@ -1,0 +1,6 @@
+Datasets
+- WOS
+https://data.mendeley.com/datasets/9rw3vkcfy4/2
+- RCV1-v2
+https://trec.nist.gov/data/reuters/reuters.html
+- NYTimes: Included in code repository
